@@ -1,6 +1,6 @@
 package kafka_practice.service;
 
-import kafka_practice.dto.MessageDto;
+import kafka_practice.dto.req.MessageDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;

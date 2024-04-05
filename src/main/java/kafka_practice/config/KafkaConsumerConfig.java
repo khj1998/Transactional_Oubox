@@ -1,6 +1,6 @@
 package kafka_practice.config;
 
-import kafka_practice.dto.MessageDto;
+import kafka_practice.dto.req.MessageDto;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;

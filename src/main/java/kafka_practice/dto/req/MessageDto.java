@@ -1,4 +1,4 @@
-package kafka_practice.dto;
+package kafka_practice.dto.req;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

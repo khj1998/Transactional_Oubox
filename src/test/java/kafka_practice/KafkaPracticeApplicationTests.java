@@ -1,7 +1,7 @@
 package kafka_practice;
 
 import kafka_practice.constant.StatusEnum;
-import kafka_practice.dto.MessageDto;
+import kafka_practice.dto.req.MessageDto;
 import kafka_practice.service.KafkaConsumer;
 import kafka_practice.service.KafkaProducer;
 import org.junit.jupiter.api.Test;

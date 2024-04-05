@@ -1,14 +1,12 @@
 package kafka_practice.service;
 
-import kafka_practice.dto.MessageDto;
+import kafka_practice.dto.req.MessageDto;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 @Slf4j
