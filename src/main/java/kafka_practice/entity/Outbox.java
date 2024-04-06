@@ -1,6 +1,7 @@
 package kafka_practice.entity;
 
 import jakarta.persistence.*;
+import kafka_practice.dto.event.RegisterEvent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,4 +33,11 @@ public class Outbox {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    public static Outbox of(RegisterEvent registerEvent) {
+        return Outbox.builder()
+                .message(registerEvent.getMessage())
+                .status("INIT")
+                .build();
+    }
 }

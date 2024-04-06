@@ -28,6 +28,8 @@ dependencies {
     runtimeOnly 'com.mysql:mysql-connector-j'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.kafka:spring-kafka-test'
+
+	implementation 'org.axonframework:axon-spring-boot-starter'
 }
 
 tasks.named('test') {

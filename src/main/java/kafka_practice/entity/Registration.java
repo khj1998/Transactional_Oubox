@@ -20,6 +20,10 @@ public class Registration {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JoinColumn(name = "user_id")
+    @ManyToOne
+    private User user;
+
     @Column(name = "message",nullable = false,length = 45,columnDefinition = "varchar")
     private String message;
 

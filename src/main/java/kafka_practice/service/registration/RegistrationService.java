@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class RegistrationService {
     private final UserRepository userRepository;
+    private final RegistrationRepository registrationRepository;
     private final ApplicationEventPublisher eventPublisher;
 
     @Transactional
@@ -33,6 +34,10 @@ public class RegistrationService {
     private RegistrationRes checkUserAndCreateEventObject(RegistrationReq req) {
         User user = userRepository.findById(req.getUserId())
                 .orElseThrow(() -> new UserNotFoundException(req.getUserId()));
+
+        Registration registration = Registration.builder()
+                .message(req.getMessage())
+                .build();
 
         return RegistrationRes.builder()
                 .userId(req.getUserId())
