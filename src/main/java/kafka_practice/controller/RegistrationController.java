@@ -1,6 +1,8 @@
 package kafka_practice.controller;
 
+import kafka_practice.dto.event.RegisterEvent;
 import kafka_practice.dto.req.RegistrationReq;
+import kafka_practice.dto.res.RegistrationRes;
 import kafka_practice.entity.Registration;
 import kafka_practice.service.registration.RegistrationService;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +16,7 @@ public class RegistrationController {
     private final RegistrationService registrationService;
 
     @PostMapping
-    public ResponseEntity<Registration> register(@RequestBody RegistrationReq req) {
+    public ResponseEntity<RegistrationRes> register(@RequestBody RegistrationReq req) {
         return ResponseEntity.ok(registrationService.register(req));
     }
 }

@@ -1,4 +1,4 @@
-package kafka_practice.service;
+package kafka_practice.service.outbox;
 
 import kafka_practice.repository.OutboxRepository;
 import lombok.RequiredArgsConstructor;

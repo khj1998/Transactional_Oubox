@@ -2,8 +2,8 @@ package kafka_practice;
 
 import kafka_practice.constant.StatusEnum;
 import kafka_practice.dto.req.MessageDto;
-import kafka_practice.service.KafkaConsumer;
-import kafka_practice.service.KafkaProducer;
+import kafka_practice.service.kafka.KafkaConsumer;
+import kafka_practice.service.kafka.KafkaProducer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

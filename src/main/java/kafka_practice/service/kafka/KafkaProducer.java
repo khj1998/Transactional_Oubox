@@ -1,4 +1,4 @@
-package kafka_practice.service;
+package kafka_practice.service.kafka;
 
 import kafka_practice.dto.req.MessageDto;
 import lombok.RequiredArgsConstructor;
