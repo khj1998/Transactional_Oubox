@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationEvent;
 @Setter
 public class RegisterEvent extends ApplicationEvent {
     private Long userId;
+    private Long outboxId;
     private String message;
 
     public RegisterEvent(Object source) {
@@ -20,5 +21,9 @@ public class RegisterEvent extends ApplicationEvent {
     public void setEventProperties(RegistrationRes registrationRes) {
         userId = registrationRes.getUserId();
         message = registrationRes.getMessage();
+    }
+
+    public void setOutBoxId(Long id) {
+        this.outboxId = id;
     }
 }

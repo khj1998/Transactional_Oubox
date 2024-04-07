@@ -1,6 +1,7 @@
 package kafka_practice.entity;
 
 import jakarta.persistence.*;
+import kafka_practice.constant.OutboxStatusEnum;
 import kafka_practice.dto.event.RegisterEvent;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,16 +29,25 @@ public class Outbox {
     @Column(name = "status",nullable = false,columnDefinition = "varchar",length = 16)
     private String status;
 
+    @JoinColumn(name = "registration_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    private Registration registration;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public static Outbox of(RegisterEvent registerEvent) {
+    public static Outbox of(RegisterEvent registerEvent,Registration registration) {
         return Outbox.builder()
+                .registration(registration)
                 .message(registerEvent.getMessage())
-                .status("INIT")
+                .status(OutboxStatusEnum.INITIALIZE.getMessage())
                 .build();
+    }
+
+    public void updateOutboxStatusToSuccess() {
+        this.status = OutboxStatusEnum.SUCCESS.getMessage();
     }
 }

@@ -1,6 +1,6 @@
 package kafka_practice;
 
-import kafka_practice.constant.StatusEnum;
+import kafka_practice.constant.OutboxStatusEnum;
 import kafka_practice.dto.req.MessageDto;
 import kafka_practice.service.kafka.KafkaConsumer;
 import kafka_practice.service.kafka.KafkaProducer;
@@ -28,7 +28,7 @@ class KafkaPracticeApplicationTests {
 
 		MessageDto messageDto = MessageDto.builder()
 				.message("kafka practice")
-				.status(StatusEnum.INITIALIZE.getMessage())
+				.status(OutboxStatusEnum.INITIALIZE.getMessage())
 				.build();
 
 		producer.send(topic,messageDto);
