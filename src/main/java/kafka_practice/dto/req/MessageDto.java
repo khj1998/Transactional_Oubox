@@ -1,16 +1,9 @@
 package kafka_practice.dto.req;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.apache.kafka.clients.producer.Callback;
-
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class MessageDto {
     private String message;
-    private String status;
+
+    public MessageDto(String message) {
+        this.message = message;
+    }
 }

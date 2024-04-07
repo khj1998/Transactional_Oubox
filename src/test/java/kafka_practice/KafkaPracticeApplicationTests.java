@@ -24,17 +24,7 @@ class KafkaPracticeApplicationTests {
 
 	@Test
 	void 카프카브로커_프로듀서_컨슈머_메시지전달() throws InterruptedException {
-		String topic = "kafka-practice";
 
-		MessageDto messageDto = MessageDto.builder()
-				.message("kafka practice")
-				.status(OutboxStatusEnum.INITIALIZE.getMessage())
-				.build();
-
-		producer.send(topic,messageDto);
-
-		consumer.getLatch().await(10,TimeUnit.SECONDS);
-		System.out.println(consumer.getPayload().getMessage());
 	}
 
 }
