@@ -1,6 +1,7 @@
 package kafka_practice.entity;
 
 import jakarta.persistence.*;
+import kafka_practice.constant.RegisterMessageEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,4 +33,11 @@ public class Registration {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    public static Registration of(User user) {
+        return Registration.builder()
+                .user(user)
+                .message(RegisterMessageEnum.DEFAULT_REGISTER.getMessage())
+                .build();
+    }
 }

@@ -16,8 +16,8 @@ public class RegistrationExternalMessageListener {
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void sendMessageAndUpdateOutbox(RegisterEvent registerEvent) {
         MessageDto messageDto = getMessageDto(registerEvent);
-
         kafkaTemplate.send("kafka-practice",messageDto);
+        
         outboxService.updateOutBoxRecord(registerEvent);
     }
 

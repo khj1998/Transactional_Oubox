@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class KafkaProducer {
+public class KafkaProducerService {
     private final KafkaTemplate<String, MessageDto> kafkaTemplate;
 
     public void send(String topic,MessageDto payload) {

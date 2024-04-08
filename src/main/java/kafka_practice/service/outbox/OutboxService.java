@@ -25,19 +25,14 @@ public class OutboxService {
     public Long saveRegistrationAndOutbox(RegisterEvent registerEvent) {
         Registration registration = saveRegistration(registerEvent);
 
-        Long outboxId = saveOutbox(registerEvent,registration);
-
-        return outboxId;
+        return saveOutbox(registerEvent,registration);
     }
 
     private Registration saveRegistration(RegisterEvent registerEvent) {
         User user = userRepository.findById(registerEvent.getUserId())
                 .orElseThrow(() -> new UserNotFoundException(registerEvent.getUserId()));
 
-        Registration registration = Registration.builder()
-                .user(user)
-                .message(RegisterMessageEnum.DEFAULT_REGISTER.getMessage())
-                .build();
+        Registration registration = Registration.of(user);
 
         return registrationRepository.save(registration);
     }
