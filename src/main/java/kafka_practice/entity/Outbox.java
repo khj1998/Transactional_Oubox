@@ -39,9 +39,9 @@ public class Outbox {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public static Outbox of(RegisterEvent registerEvent,Registration registration) {
+    public static Outbox of(RegisterEvent registerEvent) {
         return Outbox.builder()
-                .registration(registration)
+                .registration(registerEvent.getRegistration())
                 .message(registerEvent.getMessage())
                 .status(OutboxStatusEnum.INITIALIZE.getMessage())
                 .build();

@@ -17,22 +17,25 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class RegistrationService {
     private final ApplicationEventPublisher eventPublisher;
+    private final UserRepository userRepository;
+    private final RegistrationRepository registrationRepository;
 
     @Transactional
     public RegistrationRes register(RegistrationReq req) {
-        RegistrationRes registrationRes = checkRegistrationRes(req);
+        Registration registration = saveRegistration(req);
 
-        RegisterEvent registerEvent = new RegisterEvent(req);
-        registerEvent.setEventProperties(registrationRes);
+        RegisterEvent registerEvent = new RegisterEvent(registration);
         eventPublisher.publishEvent(registerEvent);
 
-        return registrationRes;
+        return RegistrationRes.of(registration);
     }
 
-    private RegistrationRes checkRegistrationRes(RegistrationReq req) {
-        return RegistrationRes.builder()
-                .userId(req.getUserId())
-                .message(req.getMessage())
-                .build();
+    private Registration saveRegistration(RegistrationReq req) {
+        User user = userRepository.findById(req.getUserId())
+                .orElseThrow(() -> new UserNotFoundException(req.getUserId()));
+
+        Registration registration = Registration.of(user);
+
+        return registrationRepository.save(registration);
     }
 }

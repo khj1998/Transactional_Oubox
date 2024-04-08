@@ -17,28 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 public class OutboxService {
-    private final RegistrationRepository registrationRepository;
     private final OutboxRepository outboxRepository;
-    private final UserRepository userRepository;
 
     @Transactional
-    public Long saveRegistrationAndOutbox(RegisterEvent registerEvent) {
-        Registration registration = saveRegistration(registerEvent);
-
-        return saveOutbox(registerEvent,registration);
-    }
-
-    private Registration saveRegistration(RegisterEvent registerEvent) {
-        User user = userRepository.findById(registerEvent.getUserId())
-                .orElseThrow(() -> new UserNotFoundException(registerEvent.getUserId()));
-
-        Registration registration = Registration.of(user);
-
-        return registrationRepository.save(registration);
-    }
-
-    private Long saveOutbox(RegisterEvent registerEvent,Registration registration) {
-        Outbox outbox = Outbox.of(registerEvent,registration);
+    public Long saveOutbox(RegisterEvent registerEvent) {
+        Outbox outbox = Outbox.of(registerEvent);
         outboxRepository.save(outbox);
 
         return outbox.getId();
