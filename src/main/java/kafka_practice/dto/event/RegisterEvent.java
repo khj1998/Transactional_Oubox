@@ -10,14 +10,13 @@ import org.springframework.context.ApplicationEvent;
 
 @Getter
 @Setter
-public class RegisterEvent extends ApplicationEvent {
+public class RegisterEvent {
     private final Long userId;
     private final String message;
     private final Registration registration;
     private Long outboxId;
 
     public RegisterEvent(Registration registration) {
-        super(registration);
         this.registration = registration;
         this.userId = registration.getUser().getId();
         this.message = registration.getMessage();
@@ -26,5 +25,4 @@ public class RegisterEvent extends ApplicationEvent {
     public void setOutBoxId(Long id) {
         this.outboxId = id;
     }
-
 }

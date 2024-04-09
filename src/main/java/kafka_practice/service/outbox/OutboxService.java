@@ -12,9 +12,11 @@ import kafka_practice.repository.OutboxRepository;
 import kafka_practice.repository.RegistrationRepository;
 import kafka_practice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 @RequiredArgsConstructor
 public class OutboxService {
     private final OutboxRepository outboxRepository;

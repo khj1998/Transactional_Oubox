@@ -26,7 +26,7 @@ public class Outbox {
     @Column(name = "message",nullable = false,columnDefinition = "varchar")
     private String message;
 
-    @Column(name = "status",nullable = false,columnDefinition = "varchar",length = 16)
+    @Column(name = "status",nullable = false,columnDefinition = "varchar",length = 32)
     private String status;
 
     @JoinColumn(name = "registration_id")
