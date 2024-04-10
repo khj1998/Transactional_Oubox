@@ -23,7 +23,7 @@ public class OutboxService {
 
     @Transactional
     public Long saveOutbox(RegisterEvent registerEvent) {
-        Outbox outbox = Outbox.of(registerEvent);
+        Outbox outbox = Outbox.of(registerEvent,OutboxStatusEnum.INITIALIZE.getMessage());
         outboxRepository.save(outbox);
 
         return outbox.getId();
@@ -36,5 +36,11 @@ public class OutboxService {
         Outbox outbox = outboxRepository.findById(outboxId)
                 .orElseThrow(() -> new OutboxNotFoundException(outboxId));
         outbox.updateOutboxStatusToSuccess();
+    }
+
+    @Transactional
+    public void saveFailedOutbox(RegisterEvent registerEvent) {
+        Outbox outbox = Outbox.of(registerEvent,OutboxStatusEnum.FAILED.getMessage());
+        outboxRepository.save(outbox);
     }
 }

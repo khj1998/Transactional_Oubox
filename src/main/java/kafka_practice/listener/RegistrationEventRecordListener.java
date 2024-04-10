@@ -29,6 +29,10 @@ public class RegistrationEventRecordListener {
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_ROLLBACK)
     public void saveFailedOutbox(RegisterEvent registerEvent) {
-        log.info("이벤트 객체 값 : {}",registerEvent);
+        /**
+         * 도메인 로직은 성공했지만 그 이후 작업에서 에러가 발생해 ROLLBACK 된 경우
+         * 예약 id를 FK로 가지는 failed 상태의 outbox 생성
+         */
+        outboxService.saveFailedOutbox(registerEvent);
     }
 }

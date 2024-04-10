@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Getter
@@ -39,15 +40,23 @@ public class Outbox {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public static Outbox of(RegisterEvent registerEvent) {
+    public static Outbox of(RegisterEvent registerEvent,String status) {
         return Outbox.builder()
                 .registration(registerEvent.getRegistration())
                 .message(registerEvent.getMessage())
-                .status(OutboxStatusEnum.INITIALIZE.getMessage())
+                .status(status)
                 .build();
     }
 
     public void updateOutboxStatusToSuccess() {
         this.status = OutboxStatusEnum.SUCCESS.getMessage();
+    }
+
+    public Boolean isOverTenSeconds() {
+        LocalDateTime now = LocalDateTime.now();
+
+        Duration duration = Duration.between(this.createdAt,now);
+
+        return duration.getSeconds() >= 10;
     }
 }
