@@ -52,6 +52,10 @@ public class Outbox {
         this.status = OutboxStatusEnum.SUCCESS.getMessage();
     }
 
+    public Boolean isSuccessStatus() {
+        return this.status.equals(OutboxStatusEnum.SUCCESS.getMessage());
+    }
+
     public Boolean isOverTenSeconds() {
         LocalDateTime now = LocalDateTime.now();
 
